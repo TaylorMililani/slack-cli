@@ -43,7 +43,20 @@ describe "User Class" do
 
   end
 
+  describe "list_all" do
+    it "lists all users" do
+      VCR.use_cassette("list_all") do
+
+        response = User.list_all
+
+        expect(response).must_be_kind_of Array
+        expect(response.first).must_be_instance_of User
+        expect(response.length).must_equal 5
+      end
+    end
   end
+
+end
 
 
 
