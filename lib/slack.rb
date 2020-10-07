@@ -27,7 +27,7 @@ def main
       puts workspace.users
     elsif user_input == "list channels"
       puts workspace.channels
-    elsif user_input == "exit"
+    elsif user_input == "quit"
       program_running = false
     else
       puts "Invalid choice! Please try again!"
