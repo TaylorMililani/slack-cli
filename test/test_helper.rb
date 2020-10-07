@@ -1,7 +1,7 @@
-require 'simplecov'
-SimpleCov.start do
-  add_filter 'test/'
-end
+# require 'simplecov'
+# SimpleCov.start do
+#   add_filter 'test/'
+# end
 
 require 'minitest'
 require 'minitest/autorun'
@@ -11,7 +11,7 @@ require 'vcr'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-require_relative '../lib/user_test'
+require_relative '../lib/user'
 
 VCR.configure do |config|
   config.cassette_library_dir = "test/cassettes" # folder where casettes will be located
