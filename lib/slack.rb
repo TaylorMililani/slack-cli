@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 require 'dotenv'
 require 'httparty'
-
+require_relative 'workspace'
 Dotenv.load
 
 def main
   puts "Welcome to the Ada Slack CLI!"
-  # workspace = Workspace.new
+  workspace = Workspace.new
 
   # TODO project
 
@@ -15,10 +15,10 @@ end
 
 main if __FILE__ == $PROGRAM_NAME
 
-URL = "https://slack.com/api/conversations.list"
-query_params = {
-    token: ENV["SLACK_TOKEN"]
-}
-response = HTTParty.get(URL, query: query_params )
-
-p response
+# URL = "https://slack.com/api/conversations.list"
+# query_params = {
+#     token: ENV["SLACK_TOKEN"]
+# }
+# response = HTTParty.get(URL, query: query_params )
+#
+# p response
