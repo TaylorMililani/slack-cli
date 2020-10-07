@@ -1,3 +1,7 @@
+require 'dotenv'
+require 'httparty'
+
+Dotenv.load
 
 class Workspace
 
