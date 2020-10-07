@@ -16,8 +16,17 @@ describe "User Class" do
       expect(@user).must_be_kind_of User
     end
 
+    it "all of the attributes must be string datatypes" do
+      expect(@user.slack_id).must_be_kind_of String
+      expect(@user.name).must_be_kind_of String
+      expect(@user.real_name).must_be_kind_of String
+      expect(@user.status_text).must_be_kind_of String
+      expect(@user.status_emoji).must_be_kind_of String
+    end
+
+  end
+
   end
 
 
 
-end
