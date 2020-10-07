@@ -1,14 +1,38 @@
 #!/usr/bin/env ruby
 require 'dotenv'
 require 'httparty'
+
 require_relative 'workspace'
+
 Dotenv.load
 
 def main
   puts "Welcome to the Ada Slack CLI!"
   workspace = Workspace.new
 
-  # TODO project
+  choices = ["list users", "list channels", 'quit']
+
+  program_running = true
+
+  while program_running
+    puts "Please choose from the following:"
+
+    choices.each_with_index do |choice, i|
+      puts "#{i + 1}: #{choice}"
+    end
+
+    user_input = gets.chomp.downcase
+
+    if user_input == "list users"
+      puts workspace.users
+    elsif user_input == "list channels"
+      puts workspace.channels
+    elsif user_input == "exit"
+      program_running = false
+    else
+      puts "Invalid choice! Please try again!"
+    end
+  end
 
   puts "Thank you for using the Ada Slack CLI"
 end
@@ -21,4 +45,4 @@ main if __FILE__ == $PROGRAM_NAME
 # }
 # response = HTTParty.get(URL, query: query_params )
 #
-# p response
+# pp response["channels"]
