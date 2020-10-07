@@ -19,9 +19,9 @@ def main
     user_input = gets.chomp.downcase
 
     if user_input == "list users"
-      puts workspace.users
+      pp workspace.users
     elsif user_input == "list channels"
-      puts workspace.channels
+      pp workspace.channels
     elsif user_input == "quit"
       program_running = false
     else

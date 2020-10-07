@@ -1,6 +1,6 @@
 require_relative 'recipient'
 
-class User < Recipient
+class Channel < Recipient
   attr_reader :topic, :member_count
 
   def initialize(slack_id:, name:, topic:, member_count:)
@@ -15,13 +15,27 @@ class User < Recipient
 
   def self.list_all
     url = "https://slack.com/api/conversations.list"
-    query_params = {
-        token: ENV["SLACK_TOKEN"]
-    }
+    query_params = {token: ENV["SLACK_TOKEN"]}
 
     response = self.get(url, query_params)
 
-    return response["channels"]
+    channels_list = response["channels"].map do |channel|
+      self.from_api(channel)
+    end
+
+    return channels_list
+  end
+
+  private
+
+  def self.from_api(recipient)
+    return new(
+        slack_id: recipient["id"],
+        name: recipient["name"],
+        topic: recipient["topic"],
+        member_count: recipient["num_members"]
+    )
   end
 
 end
+

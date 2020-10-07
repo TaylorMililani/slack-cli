@@ -23,4 +23,10 @@ class Recipient
     raise NotImplementedError, 'Implement me in a child class!'
   end
 
+  private
+
+  def self.from_api(recipient)
+    raise NotImplementedError, 'Implement me in a child class!'
+  end
+
 end

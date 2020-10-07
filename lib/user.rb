@@ -16,13 +16,45 @@ class User < Recipient
 
   def self.list_all
     url = "https://slack.com/api/users.list"
-    query_params = {
-        token: ENV["SLACK_TOKEN"]
-    }
+    query_params = {token: ENV["SLACK_TOKEN"]}
 
     response = self.get(url, query_params)
 
-    return response["members"]
+    users_list = response["members"].map do |member|
+      self.from_api(member)
+    end
+
+    return users_list
+  end
+
+  private
+
+  def self.from_api(recipient)
+    return new(
+        slack_id: recipient["id"],
+        name: recipient["name"],
+        real_name: recipient["real_name"],
+        status_text: recipient["profile"]["status_text"],
+        status_emoji: recipient["profile"]["status_emoji"]
+    )
   end
 
 end
+
+
+# user = User.new(
+#     slack_id: "U015QQ2BXFZ",
+#     name: "sarah",
+#     real_name: "Sarah Wilson",
+#     status_text: "feeling tired today",
+#     status_emoji: ":she:")
+#
+#
+# pp User.list_all.first.slack_id
+# pp User.list_all.first.name
+# pp User.list_all.first.status_emoji
+# pp User.list_all.first.status_text
+
+
+
+
