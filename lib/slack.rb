@@ -24,14 +24,15 @@ def main
     when "list channels"
       pp workspace.channels
     when "select user"
-      selected_item = workspace.select_user
+      puts "User name or ID?"
+      user = gets.chomp
+      selected_item = workspace.select_user(user)
     when "select channel"
-      selected_item = workspace.select_channel
+      puts "Name or ID?"
+      channel = gets.chomp
+      selected_item = workspace.select_channel(channel)
     when "details"
-      # pp selected_item.details
-      if selected_item == selected_user #not how this works probably?
-        pp selected_user.details # ?
-      elsif selected_item == selected_channel
+      if selected_item != nil
         pp selected_item.details
       else
         puts "A channel or user has not been selected to show details"
