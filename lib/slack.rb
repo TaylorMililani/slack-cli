@@ -5,7 +5,7 @@ def main
   puts "Welcome to the Ada Slack CLI!"
   workspace = Workspace.new
 
-  choices = ["list users", "list channels", "select user", "select channel", "details", "quit"]
+  choices = ["list users", "list channels", "select user", "select channel", "details", "send message", "quit"]
 
   program_running = true
 
@@ -27,16 +27,31 @@ def main
       puts "User name or ID?"
       user = gets.chomp
       selected_item = workspace.select_user(user)
+      if selected_item == nil
+        puts "Hmm, no user matches that name or ID"
+      end
     when "select channel"
       puts "Name or ID?"
       channel = gets.chomp
       selected_item = workspace.select_channel(channel)
+      if selected_item == nil
+        puts "Hmm, no channel matches that name or ID"
+      end
     when "details"
       if selected_item != nil
         pp selected_item.details
       else
         puts "A channel or user has not been selected to show details"
       end
+    when "send message"
+      puts "Name or ID of channel?"
+      channel = gets.chomp
+      selected_channel = workspace.select_channel(channel)
+      unless selected_channel == nil
+        puts "What's your message?"
+        text = gets.chomp
+      end
+      workspace.send_message(selected_channel, text)
     when "quit"
       program_running = false
     else

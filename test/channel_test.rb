@@ -5,7 +5,7 @@ describe "Channel Class" do
     before do
       @topic = {
           "value"=>"plants",
-          "creator"=>"taylor",
+          "creator"=>"slackbot",
           "last_set"=>1
       }
 

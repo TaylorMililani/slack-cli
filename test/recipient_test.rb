@@ -48,5 +48,12 @@ describe "Recipient Class" do
     end
   end
 
+  describe "send message" do
+    it "is able to send a message" do
+      VCR.use_cassette("send message")
+
+
+    end
+  end
 
 end
