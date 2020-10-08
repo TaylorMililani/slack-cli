@@ -16,20 +16,9 @@ class Workspace
   end
 
   def select_user(input)
-    selected_user = nil
-    @users.find do |user|
-      if input == user.id
-        selected_user = user
-      elsif input == user.name
-        selected_user = user
-      end
-    end
+    selected = @users.find { |user| user.slack_id.upcase == input.upcase || user.name.upcase == input.upcase}
 
-    if selected_user == nil
-      puts "Hmm, there isn't a user that matches that name or ID"
-    else
-      return selected_user
-    end
+    return selected
   end
 
   def select_channel(input)
