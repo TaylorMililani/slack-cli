@@ -41,7 +41,3 @@ class Recipient
 end
 
 
-
-# response = Recipient.get("https://slack.com/api/users.list", {token: "xoxb-1408315767845-1411423361794-i5lKCPEvKCqqfU"})
-#
-# pp response["error"]

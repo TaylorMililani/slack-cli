@@ -42,20 +42,6 @@ class User < Recipient
 end
 
 
-# user = User.new(
-#     slack_id: "U015QQ2BXFZ",
-#     name: "sarah",
-#     real_name: "Sarah Wilson",
-#     status_text: "feeling tired today",
-#     status_emoji: ":she:")
-#
-#
-# pp User.list_all.first.slack_id
-# pp User.list_all.first.name
-# pp User.list_all.first.status_emoji
-# pp User.list_all.first.status_text
 
-
-pp User.list_all
 
 

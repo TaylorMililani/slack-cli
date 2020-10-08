@@ -29,16 +29,20 @@ class Channel < Recipient
   private
 
   def self.from_api(recipient)
+    topic = {
+        "value"=>recipient["topic"]["value"],
+        "creater"=>recipient["topic"]["creator"],
+        "last_set"=>recipient["topic"]["last_set"]
+    }
+
     return new(
         slack_id: recipient["id"],
         name: recipient["name"],
-        topic: recipient["topic"],
+        topic: topic,
         member_count: recipient["num_members"]
     )
   end
 
 end
 
-
-pp Channel.list_all
 
