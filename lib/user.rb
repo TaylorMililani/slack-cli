@@ -27,10 +27,6 @@ class User < Recipient
     return users_list
   end
 
-  def select_user
-    #supply name or id to select user
-  end
-
   private
 
   def self.from_api(recipient)

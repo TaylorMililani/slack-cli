@@ -26,10 +26,6 @@ class Channel < Recipient
     return channels_list
   end
 
-  def select_channel
-    #supply name or id to select channel
-  end
-
   private
 
   def self.from_api(recipient)
