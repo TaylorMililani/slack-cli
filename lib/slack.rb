@@ -5,7 +5,7 @@ def main
   puts "Welcome to the Ada Slack CLI!"
   workspace = Workspace.new
 
-  choices = ["list users", "list channels", 'quit']
+  choices = ["list users", "list channels", "select user", "select channel", "details", "quit"]
 
   program_running = true
 
@@ -22,6 +22,8 @@ def main
       pp workspace.users
     elsif user_input == "list channels"
       pp workspace.channels
+    # elsif user_input == "select user"
+      #select_user  if no user corresponds, print message and return to main command loop
     elsif user_input == "quit"
       program_running = false
     else
