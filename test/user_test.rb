@@ -43,6 +43,16 @@ describe "User Class" do
 
   end
 
+  # describe "list_all" do
+  #   it "raises an error for invalid token" do
+  #     url = "https://slack.com/api/users.list"
+  #     query_params = {token: "hdbsgf46876534"}
+  #
+  #
+  #     expect(self.get(url, query_params)).must_raise SlackTokenError
+  #   end
+  # end
+
   describe "list_all" do
     it "lists all users" do
       VCR.use_cassette("list_all") do
@@ -54,7 +64,24 @@ describe "User Class" do
         expect(response.length).must_equal 5
       end
     end
+
+    it "correctly list the attributes of the first user" do
+      VCR.use_cassette("list_all") do
+
+        response = User.list_all
+
+        first_user = response.first
+
+        expect(first_user.slack_id).must_equal "USLACKBOT"
+        expect(first_user.name).must_equal "slackbot"
+        expect(first_user.real_name).must_equal "Slackbot"
+        expect(first_user.status_text).must_equal ""
+        expect(first_user.status_emoji).must_equal ""
+      end
+    end
+
   end
+
 
 end
 
