@@ -37,7 +37,6 @@ class Workspace
 
     return selected
   end
-  end
 
 end
 
