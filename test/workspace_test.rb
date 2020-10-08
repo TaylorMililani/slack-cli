@@ -82,4 +82,23 @@ describe "Workspace Class" do
     end
   end
 
+  describe "send message" do
+    it "is able to send a message" do
+      VCR.use_cassette("send message") do
+      answer = @workspace.send_message("C01C099NZ9B", "test message")
+      expect(answer).must_equal true
+      end
+    end
+    #failing
+    it "raises an error for invalid channel" do
+      VCR.use_cassette("send message error") do
+      expect{
+      answer = @workspace.send_message("bogus", "test message")
+      }.must_raise SlackApiError
+      end
+    end
+  end
+
 end
+
+

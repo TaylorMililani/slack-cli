@@ -30,19 +30,20 @@ class Workspace
     return selected
   end
 
-  def send_message(selected_channel, text)
+  def send_message(selected_item, text)
     url = "https://slack.com/api/chat.postMessage"
     response = HTTParty.post(url,
         body:  {
             token: ENV["SLACK_TOKEN"],
             text: text,
-            channel: selected_channel
+            channel: selected_item
         },
         headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
     )
-    unless response.code == 200 && response.parsed_response["ok"]
+    unless response.code == 200 || response.parsed_response["ok"]
       raise SlackApiError, "Error: #{response.parsed_response["error"]}"
     end
+    return true
   end
 
 end

@@ -44,14 +44,16 @@ def main
         puts "A channel or user has not been selected to show details"
       end
     when "send message"
-      puts "Name or ID of channel?"
-      channel = gets.chomp
-      selected_channel = workspace.select_channel(channel)
-      unless selected_channel == nil
+      # puts "Name or ID of channel?"
+      # channel = gets.chomp
+      # selected_channel = workspace.select_channel(channel)
+      if selected_item != nil
         puts "What's your message?"
         text = gets.chomp
+      else
+        puts "A channel or user has not been selected to send message"
       end
-      workspace.send_message(selected_channel, text)
+      workspace.send_message(selected_item, text)
     when "quit"
       program_running = false
     else
