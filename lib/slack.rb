@@ -18,13 +18,25 @@ def main
 
     user_input = gets.chomp.downcase
 
-    if user_input == "list users"
+    case user_input
+    when "list users"
       pp workspace.users
-    elsif user_input == "list channels"
+    when "list channels"
       pp workspace.channels
-    # elsif user_input == "select user"
-      #select_user  if no user corresponds, print message and return to main command loop
-    elsif user_input == "quit"
+    when "select user"
+      selected_item = workspace.select_user
+    when "select channel"
+      selected_item = workspace.select_channel
+    when "details"
+      # pp selected_item.details
+      if selected_item == selected_user #not how this works probably?
+        pp selected_user.details # ?
+      elsif selected_item == selected_channel
+        pp selected_item.details
+      else
+        puts "A channel or user has not been selected to show details"
+      end
+    when "quit"
       program_running = false
     else
       puts "Invalid choice! Please try again!"
@@ -45,3 +57,15 @@ main if __FILE__ == $PROGRAM_NAME
 # response = HTTParty.get(URL, query: query_params )
 #
 # pp response["channels"]
+#
+#     if user_input == "list users"
+#       pp workspace.users
+#     elsif user_input == "list channels"
+#       pp workspace.channels
+#     elsif user_input == "select user"
+#       #select_user  if no user corresponds, print message and return to main command loop
+#     elsif "quit"
+#       program_running = false
+#     else
+#       puts "Invalid choice! Please try again!"
+#     end
