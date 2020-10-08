@@ -40,9 +40,10 @@ class Workspace
         },
         headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
     )
-    unless response.parsed_response["ok"]
+    unless response.parsed_response["ok"] == true
       raise SlackApiError, "Error: #{response.parsed_response["error"]}"
     end
+
     return true
   end
 
