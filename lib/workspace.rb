@@ -33,7 +33,7 @@ class Workspace
   end
 
   def select_channel(input)
-    selected = @channels.find { |channel| channel.slack_id.upcase == user_input.upcase || channel.name.upcase == user_input.upcase}
+    selected = @channels.find { |channel| channel.slack_id.upcase == input.upcase || channel.name.upcase == input.upcase}
 
     return selected
   end
