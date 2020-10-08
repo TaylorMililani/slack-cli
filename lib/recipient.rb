@@ -3,8 +3,10 @@ require 'httparty'
 
 Dotenv.load
 
+class SlackTokenError < StandardError; end
+
 class Recipient
-  class SlackTokenError < StandardError; end
+
   attr_reader :slack_id, :name
 
   def initialize(slack_id, name)

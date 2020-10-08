@@ -43,15 +43,16 @@ describe "User Class" do
 
   end
 
-  # describe "list_all" do
-  #   it "raises an error for invalid token" do
-  #     url = "https://slack.com/api/users.list"
-  #     query_params = {token: "hdbsgf46876534"}
-  #
-  #
-  #     expect(self.get(url, query_params)).must_raise SlackTokenError
-  #   end
-  # end
+  describe "get method" do
+    it "raises an error for invalid token" do
+      VCR.use_cassette("list_all") do
+        url = "https://slack.com/api/users.list"
+        query_params = {token: "hdbsgf46876534"}
+
+        expect{User.get(url, query_params)}.must_raise SlackTokenError
+      end
+    end
+  end
 
   describe "list_all" do
     it "lists all users" do
