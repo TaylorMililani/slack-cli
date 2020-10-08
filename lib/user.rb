@@ -11,7 +11,7 @@ class User < Recipient
   end
 
   def details
-    "Slack ID: #{@slack_id}\nName: #{@name}\nReal Name: #{@real_name}\nStatus Text: #{@status_text}\nStatus Emoji: #{@status_emoji}"
+    "Slack ID: #{@slack_id}\nUsername: #{@name}\nReal Name: #{@real_name}\nStatus Text: #{@status_text}\nStatus Emoji: #{@status_emoji}"
   end
 
   def self.list_all

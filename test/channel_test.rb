@@ -1,13 +1,18 @@
 require_relative 'test_helper'
 
-
 describe "Channel Class" do
   describe "Channel Instantiation"  do
     before do
+      @topic = {
+          "value"=>"plants",
+          "creator"=>"taylor",
+          "last_set"=>1
+      }
+
       @channel = Channel.new(
           slack_id: "U015QQ2BXF",
           name: "plants_and_gardening",
-          topic: {"value"=>"plants", "creator"=>"taylor", "last_set"=>1},
+          topic: @topic,
           member_count: 2
       )
     end
@@ -24,7 +29,7 @@ describe "Channel Class" do
       expect(@channel.name).must_equal "plants_and_gardening"
 
       expect(@channel).must_respond_to :topic
-      # expect(@channel.topic).must_equal {"value"=>"plants", "creator"=>"taylor", "last_set"=>1}
+      expect(@channel.topic).must_equal @topic
 
       expect(@channel).must_respond_to :member_count
       expect(@channel.member_count).must_equal 2
@@ -39,44 +44,46 @@ describe "Channel Class" do
 
   end
 
-  # describe "list_all" do
-  #   it "lists all channels" do
-  #     VCR.use_cassette("list_all channels") do
-  #
-  #       response = Channel.list_all
-  #
-  #       expect(response).must_be_kind_of Array
-  #       expect(response.first).must_be_instance_of Channel
-  #       expect(response.length).must_equal 3
-  #     end
-  #   end
-  #
-  #   it "correctly list the attributes of the first channel" do
-  #     VCR.use_cassette("list_all") do
-  #
-  #       response = Channel.list_all
-  #
-  #       first_channel = response.first
-  #
-  #       expect(first_channel.slack_id).must_equal "C01C099NZ9B"
-  #       expect(first_channel.name).must_equal "random"
-  #       expect(first_channel.topic).must_equal { value: "", creator: "", last_set: 0 }
-  #       expect(first_channel.member_count).must_equal 2
-  #     end
-  #   end
-  #
-  #   describe "get method" do
-  #     it "raises an error for invalid token" do
-  #       VCR.use_cassette("list_all") do
-  #         url = "https://slack.com/api/users.list"
-  #         query_params = {token: "hdbsgf46876534"}
-  #
-  #         expect{Channel.get(url, query_params)}.must_raise SlackTokenError
-  #       end
-  #     end
-  #   end
-  #
-  # end
+  describe "list_all" do
+    it "lists all channels" do
+      VCR.use_cassette("list_all channels") do
+
+        response = Channel.list_all
+
+        expect(response).must_be_kind_of Array
+        expect(response.first).must_be_instance_of Channel
+        expect(response.length).must_equal 3
+      end
+    end
+
+    it "correctly list the attributes of the first channel" do
+      VCR.use_cassette("list_all channels") do
+
+        response = Channel.list_all
+
+        first_channel = response.first
+
+        first_topic = {"value"=>"", "creater"=>"", "last_set"=>0}
+
+        expect(first_channel.slack_id).must_equal "C01C099NZ9B"
+        expect(first_channel.name).must_equal "random"
+        expect(first_channel.topic).must_equal first_topic
+        expect(first_channel.member_count).must_equal 2
+      end
+    end
+
+    describe "get method" do
+      it "raises an error for invalid token" do
+        VCR.use_cassette("list_all channels") do
+          url = "https://slack.com/api/conversations.list"
+          query_params = {token: "hdbsgf46876534"}
+
+          expect{Channel.get(url, query_params)}.must_raise SlackTokenError
+        end
+      end
+    end
+
+  end
 
 
 end
