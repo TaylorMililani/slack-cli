@@ -7,7 +7,7 @@ describe "Channel Class" do
       @channel = Channel.new(
           slack_id: "U015QQ2BXF",
           name: "plants_and_gardening",
-          topic: { value: "plants", creator: "taylor", last_set: 1 },
+          topic: {"value"=>"plants", "creator"=>"taylor", "last_set"=>1},
           member_count: 2
       )
     end
@@ -24,7 +24,7 @@ describe "Channel Class" do
       expect(@channel.name).must_equal "plants_and_gardening"
 
       expect(@channel).must_respond_to :topic
-      expect(@channel.topic).must_equal { value: "plants", creator: "taylor", last_set: 1 }
+      # expect(@channel.topic).must_equal {"value"=>"plants", "creator"=>"taylor", "last_set"=>1}
 
       expect(@channel).must_respond_to :member_count
       expect(@channel.member_count).must_equal 2

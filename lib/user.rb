@@ -56,5 +56,6 @@ end
 # pp User.list_all.first.status_text
 
 
+pp User.list_all
 
 

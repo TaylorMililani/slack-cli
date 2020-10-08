@@ -39,3 +39,6 @@ class Channel < Recipient
 
 end
 
+
+pp Channel.list_all
+
